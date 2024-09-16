@@ -1,0 +1,111 @@
+.employment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+.employment-item {
+  margin: 0 10px;
+}
+
+.employment-container h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.employment-item h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.employment-item p {
+  font-size: 14px;
+}
+
+.employment-item h5 {
+  margin: 8px 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.employment-item ul {
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.employment-item {
+  padding: 30px 0;
+  border-bottom: 1px solid black;
+}
+
+.employment-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px;
+  margin-bottom: 20px;
+}
+
+.employment-container form button {
+  margin-top: 20px;
+  margin-left: 0;
+  border: none;
+  cursor: pointer;
+  background-color: #6f9d39;
+  color: #fff;
+  padding: 8px 18px;
+  max-width: 120px;
+}
+
+.employment-container form button:hover {
+  background-color: #659133;
+}
+
+.custom-file-input {
+  display: none;
+}
+
+.custom-file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 150px;
+  height: 120px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  background-color: #f5ece7;
+  color: black;
+}
+
+.custom-file-label::before {
+  content: "+";
+  font-size: 40px;
+  display: block;
+  border: 2px solid black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.file-name {
+  margin-top: 10px;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}

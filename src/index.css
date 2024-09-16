@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+main {
+  background-color: #f8efea;
+}
+
+a {
+  text-decoration: none;
+}
+
+p,
+a,
+li,
+button {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 8px;
+}
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin: 0 8px;
+}
+
+h4 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+select,
+input {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+}

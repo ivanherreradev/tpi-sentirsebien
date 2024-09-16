@@ -1,0 +1,10 @@
+export const servicesGet = "http://localhost:7010/api/Service/Get";
+export const servicesDetailsGet = "http://localhost:7010/api/ServiceDetails/GetByServiceId/";
+export const newsGet = "http://localhost:7010/api/News/Get";
+export const employeeRequestPost = "http://localhost:7010/api/EmployeeRequest/Post";
+export const loginPost = "http://localhost:7010/api/Authentication/Login";
+export const registerPost = "http://localhost:7010/api/Authentication/Register";
+export const homePost = "http://localhost:7010/api/Home/Post";
+export const openPositionsGet = "http://localhost:7010/api/OpenPositions/Get";
+export const userGet = "http://localhost:7010/api/Authentication/Get/";
+export const reservationPost = "http://localhost:7010/api/Reservation/Post";
