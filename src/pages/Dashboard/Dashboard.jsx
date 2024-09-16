@@ -101,7 +101,7 @@ export default function Dashboard() {
                 </div>
               ))
             ) : (
-              <>
+              <div style={{marginLeft: 20, marginTop: 10}}>
                 <p>Actualmente no posee ningún turno próximo.</p>
                 <p>
                   Si desea consultar nuestros servicios,{" "}
@@ -110,7 +110,7 @@ export default function Dashboard() {
                 <p>
                   <strong>Saludos cordiales, Sentirse bien SPA!</strong>
                 </p>
-              </>
+              </div>
             )}
           </div>
         </>
