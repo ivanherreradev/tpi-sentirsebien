@@ -42,11 +42,11 @@ export default function Services() {
           <p>¡Disculpe las molestias!</p>
         </div>
       ) : (
-        services.map((service) => (
+        services.map((service, index) => (
           <div key={service.id} className="service-item">
             <div className="service-image">
               <img
-                src={`/assets/services-${service.imageId}.jpg`}
+                src={`/assets/services-${index + 1}.jpg`}
                 alt={service.name}
               />
             </div>
