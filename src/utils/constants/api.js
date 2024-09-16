@@ -8,3 +8,4 @@ export const homePost = "http://localhost:7010/api/Home/Post";
 export const openPositionsGet = "http://localhost:7010/api/OpenPositions/Get";
 export const userGet = "http://localhost:7010/api/Authentication/Get/";
 export const reservationPost = "http://localhost:7010/api/Reservation/Post";
+export const appointmentsGet = "http://localhost:7010/api/Reservation/Get/";

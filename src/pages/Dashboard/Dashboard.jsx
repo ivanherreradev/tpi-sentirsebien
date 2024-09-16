@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { userGet } from "../../utils/constants/api";
+import { appointmentsGet, userGet } from "../../utils/constants/api";
 import { formatMessageAppointments } from "../../utils/functions/formatMessageAppointments";
 import "./Dashboard.css";
 
@@ -32,10 +32,10 @@ export default function Dashboard() {
     }
   };
 
-  const fetchTurnos = async (userName) => {
+  const fetchTurnos = async (email) => {
     try {
       const response = await fetch(
-        `http://localhost:7010/api/Reservation/Get/${userName}`
+        `${appointmentsGet}${email}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -46,8 +46,6 @@ export default function Dashboard() {
       console.error("Error fetching turnos:", error);
     }
   };
-
-  console.log(turnos);
 
   return (
     <div className="dashboard-container">
