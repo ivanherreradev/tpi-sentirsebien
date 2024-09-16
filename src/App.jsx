@@ -19,18 +19,18 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="sobre-nosotros" element={<About />} />
-          <Route path="servicios" element={<Services />} />
-          <Route path="noticias" element={<News />} />
-          <Route path="empleo" element={<Employment />} />
-          <Route path="iniciar-sesion" element={<Login />} />
-          <Route path="registrarse" element={<Register />} />
+          <Route path="/sobre-nosotros" element={<About />} />
+          <Route path="/servicios" element={<Services />} />
+          <Route path="/noticias" element={<News />} />
+          <Route path="/empleo" element={<Employment />} />
+          <Route path="/iniciar-sesion" element={<Login />} />
+          <Route path="/registrarse" element={<Register />} />
           <Route
-            path="panel-personal/:email"
+            path="/panel-personal/:email"
             element={<PrivateRoute element={<Dashboard />} />}
           />
           <Route
-            path="seleccionar-turno"
+            path="/seleccionar-turno"
             element={<PrivateRoute element={<SelectAppointment />} />}
           />
         </Route>
