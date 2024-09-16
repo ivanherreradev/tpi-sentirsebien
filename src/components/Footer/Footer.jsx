@@ -89,7 +89,7 @@ export default function Footer() {
           C. French 414, H3506 Resistencia, Chaco
         </p>
       </div>
-      <p>© 2024 Sentirse Bien - Todos los derechos reservados</p>
+      <p>© 2024 Todos los derechos reservados - Desarrollado por <a href="https://unequaled-aunt-b2c.notion.site/TPI-Sentirse-Bien-b4d6b02214064605b6ccbc53c47b0041" target="_blank">Ctrl+Z</a></p>
     </footer>
   );
 }

@@ -53,6 +53,12 @@ footer p {
   font-size: 16px;
 }
 
+footer p a{
+  color: #fff;
+  margin: 0;
+  text-decoration: underline;
+}
+
 .contact-information {
   display: flex;
 }
