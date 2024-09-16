@@ -7,17 +7,13 @@ import "./Dashboard.css";
 export default function Dashboard() {
   const { email } = useParams();
   const [user, setUser] = useState(null);
-  const [turno, setTurno] = useState({
-    title: "Lifting de Pestañas",
-    turnoFor: "Iván",
-    message:
-      "¡Gracias por elegirnos para tu tratamiento! Te confirmamos que tu turno para el lifting de pestañas está reservado para el 10 de septiembre de 2024 a las 17:00. Durante este tratamiento, realzaremos la curvatura natural de tus pestañas, otorgándoles un aspecto más largo y definido, sin necesidad de extensiones ni maquillaje. Te recomendamos llegar unos minutos antes de tu turno para que puedas relajarte y disfrutar al máximo de la experiencia.",
-  });
   const [personalInfo, setPersonalInfo] = useState(null);
+  const [turnos, setTurnos] = useState([]);
 
   useEffect(() => {
     if (email) {
       fetchPersonalInfo(email);
+      fetchTurnos(email);
     }
   }, [email]);
 
@@ -35,6 +31,23 @@ export default function Dashboard() {
       console.error("Error fetching personal information:", error);
     }
   };
+
+  const fetchTurnos = async (userName) => {
+    try {
+      const response = await fetch(
+        `http://localhost:7010/api/Reservation/Get/${userName}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setTurnos(data);
+    } catch (error) {
+      console.error("Error fetching turnos:", error);
+    }
+  };
+
+  console.log(turnos);
 
   return (
     <div className="dashboard-container">
@@ -70,24 +83,30 @@ export default function Dashboard() {
           </div>
 
           <h4>Turnos próximos</h4>
-          <div className="turno">
-            {turno ? (
-              <>
-                <p>
-                  <strong>{turno.title}</strong>
-                </p>
-                <p>Hola, {turno.turnoFor}!</p>
-                <p dangerouslySetInnerHTML={formatMessageAppointments(turno.message)}></p>
-                <p>¡Te esperamos!</p>
-                <p>
-                  <strong>Saludos cordiales, Sentirse bien SPA!</strong>
-                </p>
-              </>
+          <div className="turnos">
+            {turnos.length > 0 ? (
+              turnos.map((turno, index) => (
+                <div key={index} className="turno">
+                  <p>
+                    <strong>{turno.serviceDetailName}</strong>
+                  </p>
+                  <p>Hola, {turno.name}!</p>
+                  <p
+                    dangerouslySetInnerHTML={formatMessageAppointments(
+                      turno.messageBody
+                    )}
+                  ></p>
+                  <p>¡Te esperamos!</p>
+                  <p>
+                    <strong>Saludos cordiales, Sentirse bien SPA!</strong>
+                  </p>
+                </div>
+              ))
             ) : (
               <>
                 <p>Actualmente no posee ningún turno próximo.</p>
                 <p>
-                  Si desea consultar nuestros servicios
+                  Si desea consultar nuestros servicios,{" "}
                   <a href="/servicios">click aquí</a>
                 </p>
                 <p>

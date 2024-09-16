@@ -37,15 +37,31 @@ const SelectAppointment = () => {
     setSelectedHour(event.target.value);
   };
 
+  const combineDateTime = (date, time) => {
+    const [year, month, day] = date.split("-");
+    const [hours, minutes] = time.split(":");
+  
+    // Create a Date object using the local time values
+    const localDateTime = new Date(year, month - 1, day, hours, minutes);
+  
+    // Calculate the offset in hours from UTC
+    const offsetMinutes = localDateTime.getTimezoneOffset();
+    const offsetHours = offsetMinutes / 60;
+  
+    // Adjust the date-time to UTC
+    const utcDateTime = new Date(localDateTime.getTime() - offsetMinutes * 60 * 1000);
+  
+    return utcDateTime.toISOString();
+  };
+  
+
   const handleSubmit = async () => {
     if (!selectedDate || !selectedHour || !selectedDetail || !name) {
       toast.error("Por favor, complete todos los campos.");
       return;
     }
 
-    const localDate = new Date(`${selectedDate}T${selectedHour}:00`);
-
-    const startDate = localDate.toISOString();
+    const startDate = combineDateTime(selectedDate, selectedHour);
 
     const serviceDetailId = service.details.find(
       (detail) => detail.name === selectedDetail
@@ -62,6 +78,8 @@ const SelectAppointment = () => {
       serviceDetailId,
     };
 
+    console.log(requestBody)
+
     try {
       const response = await fetch(reservationPost, {
         method: "POST",
@@ -76,6 +94,7 @@ const SelectAppointment = () => {
       }
 
       toast.success("Turno confirmado exitosamente.");
+
     } catch (error) {
       console.error("Error confirming appointment:", error);
       toast.error("Error al confirmar el turno.");

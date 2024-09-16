@@ -1,5 +1,4 @@
 .dashboard-container {
-  height: 100vh;
   max-width: 800px;
   margin: 0 auto;
   padding: 30px 0;
@@ -33,11 +32,16 @@
 
 .turno {
   margin: 10px;
+  border-bottom: 1px solid black;
 }
 
 .turno p {
   margin-bottom: 12px;
   line-height: 1.75;
+}
+
+.turnos .turno:last-child {
+  border-bottom: none;
 }
 
 .turno p a {
