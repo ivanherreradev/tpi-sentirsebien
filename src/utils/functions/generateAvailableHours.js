@@ -1,21 +1,15 @@
 export const generateAvailableHours = (selectedDate) => {
-  const hours = [];
-  const dayOfWeek = selectedDate.getUTCDay();
-  let startHour, endHour;
+  const availableHours = [];
 
-  if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-    startHour = 9;
-    endHour = 20;
-  } else if (dayOfWeek === 6) {
-    startHour = 9;
-    endHour = 13;
-  } else {
-    return [];
+  // Horas de 9 a 13
+  for (let hour = 9; hour <= 13; hour++) {
+    availableHours.push(`${hour}:00`);
   }
 
-  for (let hour = startHour; hour <= endHour; hour++) {
-    hours.push(`${hour}:00`);
+  // Horas de 16 a 20
+  for (let hour = 16; hour <= 20; hour++) {
+    availableHours.push(`${hour}:00`);
   }
 
-  return hours;
+  return availableHours;
 };

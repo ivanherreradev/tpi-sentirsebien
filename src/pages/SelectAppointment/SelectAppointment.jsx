@@ -1,36 +1,38 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { toast } from "react-hot-toast";
-import { reservationPost } from "../../utils/constants/api";
-import { generateAvailableHours } from "../../utils/functions/generateAvailableHours";
-import "./SelectAppointment.css";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { API, reservationPost } from '../../utils/constants/api';
+import { generateAvailableHours } from '../../utils/functions/generateAvailableHours';
+import './SelectAppointment.css';
 
 const SelectAppointment = () => {
   const location = useLocation();
   const { service } = location.state || {};
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedDetail, setSelectedDetail] = useState("");
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDetail, setSelectedDetail] = useState('');
   const [availableHours, setAvailableHours] = useState([]);
-  const [selectedHour, setSelectedHour] = useState("");
-  const [error, setError] = useState("");
-  const [name, setName] = useState("");
+  const [selectedHour, setSelectedHour] = useState('');
+  const [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [professionals, setProfessionals] = useState([]);
+  const [employeeId, setEmployeeId] = useState('')
 
   const handleDateChange = (event) => {
     const date = new Date(event.target.value);
     const dayOfWeek = date.getUTCDay();
 
     if (dayOfWeek === 0) {
-      setError("Los domingos no están disponibles para citas.");
-      setSelectedDate("");
+      setError('Los domingos no están disponibles para citas.');
+      setSelectedDate('');
       setAvailableHours([]);
-      setSelectedHour("");
+      setSelectedHour('');
       return;
     }
 
-    setError("");
+    setError('');
     setSelectedDate(event.target.value);
     setAvailableHours(generateAvailableHours(date));
-    setSelectedHour("");
+    setSelectedHour('');
   };
 
   const handleHourChange = (event) => {
@@ -38,26 +40,27 @@ const SelectAppointment = () => {
   };
 
   const combineDateTime = (date, time) => {
-    const [year, month, day] = date.split("-");
-    const [hours, minutes] = time.split(":");
-  
+    const [year, month, day] = date.split('-');
+    const [hours, minutes] = time.split(':');
+
     // Create a Date object using the local time values
     const localDateTime = new Date(year, month - 1, day, hours, minutes);
-  
+
     // Calculate the offset in hours from UTC
     const offsetMinutes = localDateTime.getTimezoneOffset();
     const offsetHours = offsetMinutes / 60;
-  
+
     // Adjust the date-time to UTC
-    const utcDateTime = new Date(localDateTime.getTime() - offsetMinutes * 60 * 1000);
-  
+    const utcDateTime = new Date(
+      localDateTime.getTime() - offsetMinutes * 60 * 1000
+    );
+
     return utcDateTime.toISOString();
   };
-  
 
   const handleSubmit = async () => {
     if (!selectedDate || !selectedHour || !selectedDetail || !name) {
-      toast.error("Por favor, complete todos los campos.");
+      toast.error('Por favor, complete todos los campos.');
       return;
     }
 
@@ -68,7 +71,7 @@ const SelectAppointment = () => {
     )?.id;
 
     if (!serviceDetailId) {
-      toast.error("Servicio no encontrado.");
+      toast.error('Servicio no encontrado.');
       return;
     }
 
@@ -76,46 +79,58 @@ const SelectAppointment = () => {
       startDate,
       userEmail: name,
       serviceDetailId,
+      employeeId
     };
 
-    console.log(requestBody)
+    console.log(requestBody);
 
     try {
       const response = await fetch(reservationPost, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
-        throw new Error("Error en la solicitud");
+        throw new Error('Error en la solicitud');
       }
 
-      toast.success("Turno confirmado exitosamente.");
-
+      toast.success('Turno confirmado exitosamente.');
     } catch (error) {
-      console.error("Error confirming appointment:", error);
-      toast.error("Error al confirmar el turno.");
+      console.error('Error confirming appointment:', error);
+      toast.error('Error al confirmar el turno.');
     }
   };
 
+  useEffect(() => {
+    setName(localStorage.getItem('email'));
+
+    fetch(`${API}/api/Employee/GetProfessionals`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.$values);
+        setProfessionals(data.$values);
+      })
+      .catch((error) => console.error('Error fetching professionals:', error));
+  }, []);
+
   return (
-    <div className="appointment-container">
+    <div className='appointment-container'>
       <h2>
-        Agendá tu turno para:{" "}
-        {service ? service.name : "Servicio no especificado"}
+        Agendá tu turno para:{' '}
+        {service ? service.name : 'Servicio no especificado'}
       </h2>
 
-      <div className="form-group">
-        <label htmlFor="serviceDetail">Seleccionar servicio:</label>
+      <div className='form-group'>
+        <label htmlFor='serviceDetail'>Seleccionar servicio:</label>
         <select
-          id="serviceDetail"
+          id='serviceDetail'
           value={selectedDetail}
           onChange={(e) => setSelectedDetail(e.target.value)}
         >
-          <option value="">Selecciona una opción</option>
+          <option value=''>Selecciona una opción</option>
           {service &&
             service.details.map((detail, index) => (
               <option key={index} value={detail.name}>
@@ -125,28 +140,28 @@ const SelectAppointment = () => {
         </select>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="date">Seleccionar fecha:</label>
+      <div className='form-group'>
+        <label htmlFor='date'>Seleccionar fecha:</label>
         <input
-          type="date"
-          id="date"
+          type='date'
+          id='date'
           value={selectedDate}
           onChange={handleDateChange}
-          min={new Date().toISOString().split("T")[0]}
+          min={new Date().toISOString().split('T')[0]}
         />
       </div>
 
-      {error && <p style={{ color: "red", marginBottom: "12px" }}>{error}</p>}
+      {error && <p style={{ color: 'red', marginBottom: '12px' }}>{error}</p>}
 
-      <div className="form-group">
-        <label htmlFor="hours">Seleccionar hora:</label>
+      <div className='form-group'>
+        <label htmlFor='hours'>Seleccionar hora:</label>
         <select
-          id="hours"
+          id='hours'
           value={selectedHour}
           onChange={handleHourChange}
           disabled={!availableHours.length}
         >
-          <option value="">Selecciona una hora</option>
+          <option value=''>Selecciona una hora</option>
           {availableHours.map((hour, index) => (
             <option key={index} value={hour}>
               {hour}
@@ -155,11 +170,30 @@ const SelectAppointment = () => {
         </select>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="email">Email registrado:</label>
+      <div className='form-group'>
+        <label htmlFor='professional-select'>Seleccionar Profesional:</label>
+        <select
+          id='professional-select'
+          name='professional'
+          onChange={(e) => setEmployeeId(e.target.value)} // Capture the selected ID
+        >
+          <option value=''>Selecciona un profesional</option>
+          {professionals?.map((professional) => (
+            <option
+              key={professional.id}
+              value={professional.id} // Pass the professional's ID as the value
+            >
+              {professional.name} {professional.lastName}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className='form-group'>
+        <label htmlFor='email'>Email registrado:</label>
         <input
-          type="email"
-          id="email"
+          type='email'
+          id='email'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
