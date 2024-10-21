@@ -94,7 +94,7 @@ export default function Register() {
       }
 
       toast.success('Usuario registrado correctamente.');
-      navigate('/login');
+      navigate('/');
       
     } catch (error) {
       toast.error('Error en la conexión. Por favor, intenta nuevamente.');
