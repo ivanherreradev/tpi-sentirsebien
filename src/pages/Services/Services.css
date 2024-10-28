@@ -1,3 +1,13 @@
+.loading {
+  padding-top: 40px;
+  height: 100vh;
+  text-align: center;
+}
+
+.loading p {
+  font-weight: 600;
+}
+
 .services-container {
   max-width: 800px;
   margin: 0 auto;

@@ -9,6 +9,8 @@ export default function ServiceModal({ service, onClose }) {
     navigate("/seleccionar-turno", { state: { service } });
   };
 
+  console.log(service)
+
   return (
     <div className="modal">
       <div className="modal-content">

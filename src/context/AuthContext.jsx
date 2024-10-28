@@ -1,9 +1,10 @@
 import React, { createContext, useState } from "react";
-import { loginPost } from "../utils/constants/api";
+import { API, loginPost } from "../utils/constants/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
@@ -12,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch(loginPost, {
+      const response = await fetch(`${API}/api/Authentication/Login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,11 +23,13 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
 
+      console.log(data)
+
       if (data.result) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("email", email);
         setAuth({ token: data.token, email });
-
+        setUser(data)
         return { success: true };
       } else {
         return { success: false, errors: data.errors };
@@ -44,6 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     auth,
+    user,
     login,
     logout,
   };

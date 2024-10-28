@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.dashboard-container .input-group {
+  margin: 10px;
+}
+
 .dashboard-container h2 {
   text-align: center;
   text-transform: uppercase;
@@ -32,16 +36,15 @@
 
 .turno {
   margin: 10px;
-  border-bottom: 1px solid black;
+  background-color: #aed9c6;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .turno p {
   margin-bottom: 12px;
   line-height: 1.75;
-}
-
-.turnos .turno:last-child {
-  border-bottom: none;
 }
 
 .turno p a {
@@ -57,6 +60,34 @@
 
 .loading-dashboard p {
   font-weight: 600;
+}
+
+.turno-btn-danger {
+  background-color: #c11717;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 3px;
+  border: 1px solid #c11717;
+  cursor: pointer;
+}
+
+.turno-btn-success {
+  background-color: #6f9d39;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 3px;
+  border: 1px solid #6f9d39;
+  cursor: pointer;
+}
+
+.turno-btn-danger:hover {
+  transition: 0.2s ease-in-out;
+  background-color: #9d0208;
+}
+
+.turno-btn-success:hover {
+  transition: 0.2s ease-in-out;
+  background-color: #659133;
 }
 
 @media (max-width: 550px) {

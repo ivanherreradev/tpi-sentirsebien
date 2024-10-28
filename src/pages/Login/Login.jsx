@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
 import Input from "../../components/Input/Input";
@@ -19,17 +19,10 @@ export default function Login() {
     const result = await login(email, password);
 
     if (!result.success) {
-      if (result.errors) {
-        Object.keys(result.errors).forEach((key) => {
-          const messages = result.errors[key];
-
-          if (Array.isArray(messages)) {
-            messages.forEach((message) => {
-              toast.error(message);
-            });
-          } else {
-            toast.error(messages);
-          }
+      if (result.errors && result.errors.$values) {
+        // Acceder directamente a los mensajes dentro de $values si existen
+        result.errors.$values.forEach((message) => {
+          toast.error(message);
         });
       } else {
         toast.error("Inicio de sesión fallido. Intente nuevamente!");
@@ -39,7 +32,7 @@ export default function Login() {
 
       setTimeout(() => {
         navigate(`/panel-personal/${encodeURIComponent(email)}`);
-      }, 2000);
+      }, 1500);
     }
   };
 
@@ -64,7 +57,7 @@ export default function Login() {
         {error && <p className="error-message">{error}</p>}{" "}
         <div>
           <button type="submit">Ingresar</button>
-          <a href="/">Volver al inicio</a>
+          <Link to="/">Volver al inicio</Link>
         </div>
       </form>
     </div>

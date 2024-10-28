@@ -7,9 +7,11 @@ export const registerPost = "https://www.sentirsebien.somee.com/api/Authenticati
 export const homePost = "https://www.sentirsebien.somee.com/api/Home/Post";
 export const openPositionsGet = "https://www.sentirsebien.somee.com/api/OpenPositions/Get";
 export const userGet = "https://www.sentirsebien.somee.com/api/Authentication/Get/";
-export const reservationPost = "https://www.sentirsebiensb.somee.com/api/Reservation/Post3";
+// export const reservationPost = "https://www.sentirsebiensb.somee.com/api/Reservation/Post3";
+export const reservationPost = "http://localhost:7010/api/Reservation/Post3";
 export const appointmentsGet = "https://www.sentirsebien.somee.com/api/Reservation/Get/";
-export const API = 'https://www.sentirsebiensb.somee.com';
+// export const API = 'https://www.sentirsebiensb.somee.com';
+export const API = 'https://www.sbienspa.somee.com';
 export const provinciasConCiudades = {
   "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil"],
   "CABA": ["Ciudad Autónoma de Buenos Aires"],

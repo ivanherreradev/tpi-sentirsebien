@@ -1,0 +1,67 @@
+/* src/components/CancelAppointmentModal/CancelAppointmentModal.css */
+.cancel-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Asegúrate de que el modal esté por encima de otros elementos */
+}
+
+.cancel-modal-overlay .modal-content {
+  background: white;
+  color: black;
+  border-radius: 8px;
+  padding: 20px;
+  width: 500px; /* Ajusta el ancho según tus necesidades */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.cancel-modal-overlay .modal-content h3 {
+  font-size: 26px;
+}
+
+.cancel-modal-overlay .modal-content h4 {
+  color: black;
+  margin-top: 20px;
+}
+
+.cancel-modal-overlay .modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.cancel-modal-overlay .modal-buttons .btn-cancel {
+  background-color: #c11717;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 3px;
+  border: 1px solid #c11717;
+  cursor: pointer;
+}
+
+.cancel-modal-overlay .modal-buttons .btn-confirm {
+  background-color: #6f9d39;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 3px;
+  border: 1px solid #6f9d39;
+  cursor: pointer;
+}
+
+.cancel-modal-overlay .modal-buttons .btn-confirm:hover {
+  transition: 0.2s ease-in-out;
+  background-color: #659133;
+}
+
+.cancel-modal-overlay .modal-buttons .btn-cancel:hover {
+  transition: 0.2s ease-in-out;
+  background-color: #9d0208;
+}

@@ -42,7 +42,7 @@
 
 .login-container form a {
   color: #c61c56;
-  font-weight: 00;
+  font-weight: 600;
 }
 
 @media (max-width: 550px) {
