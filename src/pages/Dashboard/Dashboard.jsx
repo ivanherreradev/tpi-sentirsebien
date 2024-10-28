@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { API, appointmentsGet, userGet } from '../../utils/constants/api';
 import { formatMessageAppointments } from '../../utils/functions/formatMessageAppointments';
-import toast from 'react-hot-toast';
-import './Dashboard.css';
 import PaymentModal from '../../components/PaymentModal/PaymentModal';
 import CancelAppointmentModal from '../../components/CancelAppointmentModal/CancelAppointmentModal';
+import { AuthContext } from '../../context/AuthContext';
+import './Dashboard.css';
 
 export default function Dashboard() {
+  const {user} = useContext(AuthContext)
   const { email } = useParams();
-  const [user, setUser] = useState(null);
+  const [userDashboard, setUser] = useState(null);
   const [personalInfo, setPersonalInfo] = useState(null);
   const [turnos, setTurnos] = useState([]);
   const [filter, setFilter] = useState('Activo'); // Filter state with default to show active appointments
@@ -35,21 +36,6 @@ export default function Dashboard() {
 
   const closeCancelModal = () => setShowCancelModal(false);
 
-  const fetchPersonalInfo = async (email) => {
-    try {
-      const response = await fetch(`${userGet}${email}`);
-      if (!response.ok) {
-        throw new Error('Error de red');
-      }
-      const data = await response.json();
-
-      setPersonalInfo(data);
-      setUser(data.name);
-    } catch (error) {
-      console.error('Error al obtener información personal:', error);
-    }
-  };
-
   const fetchTurnos = async (email) => {
     try {
       const response = await fetch(`${API}/api/Reservation/Get/${email}`);
@@ -70,7 +56,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (email) {
-      fetchPersonalInfo(email);
+      console.log(user)
       fetchTurnos(email);
     }
   }, [email]);
@@ -91,33 +77,27 @@ export default function Dashboard() {
     <div className='dashboard-container'>
       {user ? (
         <>
-          <h2>HOLA, {user}! 👋</h2>
+          <h2>HOLA, {user.name}! 👋</h2>
 
           <h4>Datos personales</h4>
           <div className='personal-information'>
-            {personalInfo ? (
               <>
                 <p>
-                  <strong>Nombre y apellido:</strong> {personalInfo.name}{' '}
-                  {personalInfo.lastName}
+                  <strong>Nombre y apellido:</strong> {user.name}{' '}
+                  {user.lastName}
                 </p>
                 <p>
-                  <strong>Ubicación:</strong> {personalInfo.province},{' '}
-                  {personalInfo.city}
+                  <strong>Ubicación:</strong> {user.province},{' '}
+                  {user.city}
                 </p>
                 <p>
-                  <strong>Dirección:</strong> {personalInfo.address}
+                  <strong>Dirección:</strong> {user.address}
                 </p>
                 <p>
                   <strong>Correo electrónico:</strong>{' '}
-                  {personalInfo.emailAddress}
+                  {user.userName}
                 </p>
               </>
-            ) : (
-              <div className='loading-dashboard'>
-                <p>Cargando panel personal...</p>
-              </div>
-            )}
           </div>
 
           <h4>Tus turnos:</h4>
