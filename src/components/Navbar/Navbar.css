@@ -114,17 +114,17 @@
   margin: 12px 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
   .navbar-menu a {
     font-size: 14px;
   }
 
   .navbar-buttons {
-    margin-left: 1.25rem;
+    margin-left: 1rem;
   }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
   .navbar-logo a {
     display: none;
   }
@@ -134,7 +134,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1010px) {
   .navbar {
     justify-content: space-between;
   }

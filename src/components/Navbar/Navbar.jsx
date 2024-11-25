@@ -78,6 +78,11 @@ const Navbar = () => {
               Empleo
             </a>
           </li>
+          <li>
+            <a href="/descargar-app" onClick={handleLinkClick}>
+              Descarga la APP
+            </a>
+          </li>
         </ul>
         <div className="navbar-buttons">
           {auth.token ? (

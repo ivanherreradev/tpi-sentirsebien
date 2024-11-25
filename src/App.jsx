@@ -8,6 +8,7 @@ import News from "./pages/News/News";
 import Employment from "./pages/Employment/Employment";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import { DownloadApp } from "./pages/DownloadApp/DownloadApp";
 import SelectAppointment from "./pages/SelectAppointment/SelectAppointment";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./index.css";
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/empleo" element={<Employment />} />
           <Route path="/iniciar-sesion" element={<Login />} />
           <Route path="/registrarse" element={<Register />} />
+          <Route path="/descargar-app" element={<DownloadApp />} />
           <Route
             path="/panel-personal/:email"
             element={<PrivateRoute element={<Dashboard />} />}

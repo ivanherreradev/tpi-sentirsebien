@@ -28,6 +28,8 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (data) {
+        console.log(data)
+
         localStorage.setItem("token", data.token);
         localStorage.setItem("email", email);
         localStorage.setItem("user", JSON.stringify(data.user)); // Store user data in localStorage

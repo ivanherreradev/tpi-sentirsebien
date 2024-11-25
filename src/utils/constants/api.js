@@ -11,7 +11,9 @@ export const userGet = "https://www.sentirsebien.somee.com/api/Authentication/Ge
 export const reservationPost = "http://localhost:7010/api/Reservation/Post3";
 export const appointmentsGet = "https://www.sentirsebien.somee.com/api/Reservation/Get/";
 // export const API = 'https://www.sentirsebiensb.somee.com';
-export const API = 'https://www.sbienspa.somee.com';
+export const API = 'https://www.sbienspan.somee.com';
+
+
 export const provinciasConCiudades = {
   "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil"],
   "CABA": ["Ciudad Autónoma de Buenos Aires"],
